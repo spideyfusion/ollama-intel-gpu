@@ -52,7 +52,14 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           tags: ${{ steps.meta.outputs.tags }}
 
-      - name: Image registry cleanup
+      - name: Remove untagged images
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: ${{ env.REPOSITORY_NAME }}
+          package-type: container
+          delete-only-untagged-versions: 'true'
+
+      - name: Keep image history
         uses: actions/delete-package-versions@v5
         with:
           package-name: ${{ env.REPOSITORY_NAME }}
