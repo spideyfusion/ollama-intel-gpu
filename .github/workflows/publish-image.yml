@@ -51,17 +51,3 @@ jobs:
             IPEXLLM_PORTABLE_ZIP_FILENAME=ollama-ipex-llm-2.2.0-ubuntu.tgz
           annotations: ${{ steps.meta.outputs.annotations }}
           tags: ${{ steps.meta.outputs.tags }}
-
-      - name: Remove untagged images
-        uses: actions/delete-package-versions@v5
-        with:
-          package-name: ${{ env.REPOSITORY_NAME }}
-          package-type: container
-          delete-only-untagged-versions: 'true'
-
-      - name: Keep image history
-        uses: actions/delete-package-versions@v5
-        with:
-          package-name: ${{ env.REPOSITORY_NAME }}
-          package-type: container
-          min-versions-to-keep: 7
