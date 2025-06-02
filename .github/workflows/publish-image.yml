@@ -32,9 +32,8 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          flavor: |
-            latest=true
           tags: |
+            type=raw,value=latest
             type=schedule,pattern={{date 'YYYYMMDD'}}
 
       - name: Build and push
